@@ -1,11 +1,14 @@
+import dotenv from 'dotenv';
 import pg from 'pg';
 const { Pool } = pg;
 
+dotenv.config();
+
 let localPoolConfig = {
-    user: 'postgres',
-    password: 'admin',
+    user: process.env.PG_USERNAME,
+    password: process.env.PG_PASSWORD,
     host: 'localhost',
-    port: '5432',
+    port: process.env.PG_PORT,
     database: 'citiesineurope'
 };
 

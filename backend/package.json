@@ -5,6 +5,7 @@
     "main": "src/index.js",
     "type": "module",
     "scripts": {
+        "seed": "db-migrate db:drop citiesineurope && db-migrate db:create citiesineurope && db-migrate up",
         "dev": "nodemon .",
         "start": "node ."
     },
@@ -12,9 +13,11 @@
     "author": "",
     "license": "@@@",
     "dependencies": {
+        "accesscontrol": "^2.2.1",
         "bcrypt": "^5.0.1",
         "cookie-parser": "^1.4.5",
         "cors": "^2.8.5",
+        "db-migrate-pg": "^1.2.2",
         "dotenv": "^10.0.0",
         "express": "^4.17.1",
         "http-status-codes": "^2.1.4",
