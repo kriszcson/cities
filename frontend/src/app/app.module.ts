@@ -1,26 +1,38 @@
-import { NgModule } from '@angular/core';
+import { ErrorHandler, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AppBootstrapModule } from './bootstrap.module';
+import { AuthService } from './login/auth/auth.service';
 import { LoginComponent } from './login/login.component';
-import { MainComponent } from './main/main.component';
-import { HeaderComponent } from './main/header/header.component';
-import { FooterComponent } from './main/footer/footer.component';
+import { CityService } from './services/cities.service';
+import { AuthInterceptor } from './login/auth/auth.interceptor';
+import { AuthGuard } from './login/auth/auth.guard';
+import { GlobalErrorHandlerService } from './helpers/http-error.interceptor';
+import { GlobalHttpInterceptorService } from './helpers/error.interceptor';
+
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    LoginComponent,
-    MainComponent,
-    HeaderComponent,
-    FooterComponent
-  ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    AppBootstrapModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
-  providers: [],
+  declarations: [
+    AppComponent, LoginComponent
+  ],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },/* 
+    { provide: HTTP_INTERCEPTORS, useClass: GlobalHttpInterceptorService, multi: true },
+    { provide: ErrorHandler, useClass: GlobalErrorHandlerService }, */
+    AuthGuard, FormBuilder, AuthService, CityService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
