@@ -4,7 +4,7 @@ import { Observable } from "rxjs";
 import { exhaustMap, map, take, tap } from "rxjs/operators";
 
 import { environment } from "src/environments/environment";
-import { AuthService } from "../login/auth/auth.service";
+import { AuthService } from "./auth.service";
 import { User } from "../models/user.model";
 import { City } from "../models/city.model";
 

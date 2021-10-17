@@ -5,7 +5,7 @@ import pool from '../../db/db.js';
 async function getCities(req, res) {
     try {
         const cities = await pool.query(`SELECT * FROM cities;`);
-        return res.status(StatusCodes.OK).json(cities.rows);
+        return res.status(StatusCodes.OK).json({ cities: cities.rows });
     } catch (err) {
         return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: err });
     }
@@ -13,7 +13,7 @@ async function getCities(req, res) {
 
 async function insertCity(req, res) {
     try {
-        const cities = await pool.query(`
+        const city = await pool.query(`
             INSERT INTO
             cities(
                 city_name,
@@ -27,7 +27,7 @@ async function insertCity(req, res) {
             req.body.city_long_desc,
             req.body.city_img_url,
         ]);
-        return res.status(StatusCodes.OK).json(cities.rows);
+        return res.status(StatusCodes.OK).json(city.rows);
     } catch (err) {
         return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: err });
     }

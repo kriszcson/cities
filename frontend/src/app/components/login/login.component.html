@@ -5,7 +5,7 @@
         <div class="col-md-7 col-sm-2">
             <div class="login-main-text  text-secondary">
                 <div class="login-main-text__heading">citiesineurope.</div>
-                <div class="login-main-text__desc">Üdvözöljük</div>
+                <div class="login-main-text__desc">Bejelentkezés</div>
             </div>
             <div class="login-form">
                 <form [formGroup]="signinForm" (ngSubmit)="onSubmit()">
@@ -28,6 +28,7 @@
                     <div class="spinner-wrapper">
                         <div *ngIf="isLoading" class="spinner-wrapper__spinner spinner-border text-secondary " role="!isLoading "></div>
                     </div>
+                    <div *ngIf="error" class="error alert alert-danger">{{error}}</div>
                 </form>
             </div>
         </div>

@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment';
 import jwt_decode from 'jwt-decode';
 
 import { AuthResponseData } from '../models/auth-response.interface';
-import { User } from '../../models/user.model';
+import { User } from '../models/user.model';
 
 
 @Injectable({
@@ -41,9 +41,7 @@ export class AuthService {
 
     private handleAuthentication(resData: AuthResponseData): void {
         const decodedToken: any = jwt_decode(resData.accessToken);
-        console.log(decodedToken);
         const tokenExpiration = new Date(decodedToken.exp * 1000);
-        console.log(tokenExpiration);
         const user = new User(resData.email, resData.name, tokenExpiration, resData.accessToken, resData.refreshToken);
         this.user.next(user);
         localStorage.setItem('userData', JSON.stringify(user));

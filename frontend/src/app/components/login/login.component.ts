@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
-import { City } from '../models/city.model';
-import { User } from '../models/user.model';
-import { CityService } from '../services/cities.service';
-import { AuthService } from './auth/auth.service';
-import { AuthResponseData } from './models/auth-response.interface';
+import { City } from '../../models/city.model';
+import { CityService } from '../../services/cities.service';
+import { AuthService } from '../../services/auth.service';
+import { AuthResponseData } from '../../models/auth-response.interface';
 
 @Component({
   selector: 'app-login',

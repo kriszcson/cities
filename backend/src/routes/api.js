@@ -10,7 +10,7 @@ const router = express.Router();
 router.post('/auth/login', login);
 router.post('/auth/signup', signup);
 
-//router.use(authenticateToken);
+router.use(authenticateToken);
 
 router.get('/auth/refresh_token', getRefreshToken);
 router.delete('/auth/refresh_token', deleteRefreshToken);
