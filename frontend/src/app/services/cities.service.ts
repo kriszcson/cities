@@ -25,13 +25,18 @@ export class CityService {
                 const headers = new HttpHeaders()
                     .set('Authorization', `Bearer ${userData._token}`)
                 return this.http.get<any>(
-                    `${environment.BACKEND_URL}/cities`,/*  { headers } */
+                    `${environment.BACKEND_URL}/cities`
                 );
             }),
             map(data => {
                 return data.cities.map((city: any) => {
                     return {
-                        ...city
+                        id: city.id,
+                        name: city.city_name,
+                        country: city.city_country,
+                        shortDesc: city.city_short_desc,
+                        longDesc: city.city_long_desc,
+                        imgUrl: city.city_img_url
                     };
                 });
             }),

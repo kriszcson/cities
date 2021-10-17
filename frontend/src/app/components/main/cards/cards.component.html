@@ -1,0 +1,26 @@
+<section class="wrapper">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-4" *ngFor="let city of cities">
+                <div class="card text-white card-has-bg click-col" [ngStyle]="{'background': 'url(' +getBgImageSrc(city.imgUrl)+ ')no-repeat center center fixed'}">
+                    <div class="card-img-overlay d-flex flex-column">
+                        <div class="card-body">
+                            <small class="card-meta mb-2">{{city.country}}  </small>
+                            <h4 class="card-title mt-0 ">
+                                {{city.name}}</h4>
+                        </div>
+                        <div class="card-footer">
+                            <div class="media">
+                                <div class="media-body">
+                                    <small>{{city.shortDesc}}</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>

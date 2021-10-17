@@ -11,6 +11,8 @@ import { LoginComponent } from './components/login/login.component';
 import { CityService } from './services/cities.service';
 import { AuthInterceptor } from './components/login/auth/auth.interceptor';
 import { AuthGuard } from './components/login/auth/auth.guard';
+import { MainComponent } from './components/main/main.component';
+import { CardsComponent } from './components/main/cards/cards.component';
 
 
 @NgModule({
@@ -23,7 +25,7 @@ import { AuthGuard } from './components/login/auth/auth.guard';
     ReactiveFormsModule,
   ],
   declarations: [
-    AppComponent, LoginComponent
+    AppComponent, LoginComponent, MainComponent, CardsComponent
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },/* 
