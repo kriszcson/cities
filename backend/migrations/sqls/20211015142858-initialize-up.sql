@@ -13,12 +13,14 @@ VALUES
     'admin',
     'admin@admin.com',
     '$2b$10$0KK4U1qwh62fUF9gVR4ODOu49ogb5Axr0btXExazh86M3EtJfvM.6',
+    /* admin */
     'admin'
   ),
   (
     'user_1',
     '1@1.1',
     '$2b$10$ngw/s3qOV/3lZAlIoZ.gF.986TsV96weM53BSRhgoYW6fUJFecJ6.',
+    /* 1 */
     'user'
   );
 Create Table cities(

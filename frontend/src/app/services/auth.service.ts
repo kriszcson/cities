@@ -64,11 +64,11 @@ export class AuthService {
                 userData._token,
                 userData._refreshToken
             );
-            if (loadedUser._token) {
+            if (loadedUser.token) {
                 const expirationDuration = new Date(userData._tokenExpirationDate).getTime() - new Date().getTime();
                 this.autoLogOut(expirationDuration);
             }
-            if (loadedUser._token) {
+            if (loadedUser.token) {
                 this.user.next(loadedUser);
             }
         } else {

@@ -15,4 +15,25 @@ async function authenticateToken(req, res, next) {
     });
 };
 
-export { authenticateToken };
+async function authenticateAdmin(req, res, next) {
+    try {
+        const actualUser = req.user;
+        if (!actualUser) {
+            return res.status(StatusCodes.UNAUTHORIZED).json({
+                error: "You need to be logged in to access this route."
+            });
+        }
+        if (actualUser.user_role !== 'admin') {
+            return res.status(StatusCodes.FORBIDDEN).json({
+                error: "You dont have permission to access this route."
+            });
+
+        }
+        next();
+    } catch (error) {
+        next(error);
+    }
+};
+
+
+export { authenticateToken, authenticateAdmin };
