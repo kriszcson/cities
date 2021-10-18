@@ -7,10 +7,13 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
+                    <a *ngIf="getUser() && getHaveRole()" class="nav-link" [routerLink]="['/admin']">Admin</a>
+                </li>
+                <li class="nav-item">
                     <a *ngIf="getUser()" class="nav-link" (click)="logout()">Kijelentkezés</a>
                 </li>
                 <li class="nav-item">
-                    <a *ngIf="getHaveRole()" class="nav-link" href="#">Admin</a>
+                    <a *ngIf="!getUser()" class="nav-link" (click)="switchMode()">{{getSignInOrUpString()}}</a>
                 </li>
             </ul>
         </div>

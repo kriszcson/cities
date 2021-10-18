@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import jwt_decode from 'jwt-decode';
+import { BehaviorSubject } from 'rxjs';
 import { User } from 'src/app/models/user.model';
 
 import { AuthService } from 'src/app/services/auth.service';
@@ -15,6 +16,8 @@ export class HeaderComponent implements OnInit {
 
   private haveRole = false;
   private user: User | null = null;
+  isLoginMode = true;
+  @Output() isLoginEventEmitter: EventEmitter<boolean> = new EventEmitter();
 
   constructor(
     private readonly router: Router,
@@ -27,6 +30,8 @@ export class HeaderComponent implements OnInit {
       if (user) {
         const decodedToken: any = jwt_decode(user?.token || '')
         this.haveRole = decodedToken.user_role === 'admin';
+      } else {
+        this.router.navigate(['/login'])
       }
     })
   }
@@ -37,6 +42,15 @@ export class HeaderComponent implements OnInit {
 
   getUser() {
     return this.user;
+  }
+
+  getSignInOrUpString() {
+    return this.isLoginMode ? 'Regisztráció' : 'Bejelentkezés';
+  }
+
+  switchMode() {
+    this.isLoginMode = !this.isLoginMode;
+    this.isLoginEventEmitter.emit(this.isLoginMode);
   }
 
   logout() {

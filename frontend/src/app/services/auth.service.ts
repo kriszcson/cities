@@ -39,6 +39,19 @@ export class AuthService {
             )
     }
 
+    signup(email: string, name: string, password: string): any {
+        return this.http.post<AuthResponseData>
+            (
+                `${environment.BACKEND_URL}/auth/signup`, { user_email: email, user_name: name, user_password: password }
+            ).pipe(map(
+                resData => {
+                    this.handleAuthentication(resData);
+                }), catchError((err) => {
+                    return throwError(err);
+                })
+            )
+    }
+
     private handleAuthentication(resData: AuthResponseData): void {
         const decodedToken: any = jwt_decode(resData.accessToken);
         const tokenExpiration = new Date(decodedToken.exp * 1000);

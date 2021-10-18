@@ -1,0 +1,50 @@
+.wrapper {
+    margin: 5rem 20rem;
+    width: 40%;
+}
+
+.btn-primary {
+    background-color: #4f6594 !important;
+    font-weight: 600;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+}
+
+.btn-warning {
+    margin-top: 1rem;
+    background-color: #884040 !important;
+    font-weight: 600;
+    color: white !important;
+    border: none !important;
+}
+
+.title {
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: #884040;
+    margin-bottom: 1rem;
+}
+
+.form-check {
+    margin-top: 0.5rem;
+}
+
+input {
+    margin-top: 0.3rem;
+    margin-bottom: 0.5rem;
+}
+
+.delete {
+    .form-control:focus {
+        border-color: #884040 !important;
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(106, 23, 23, 0.385) !important;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .wrapper {
+        margin: 0 auto;
+        margin-top: 15rem;
+        width: 60%;
+    }
+}

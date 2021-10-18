@@ -19,7 +19,7 @@ async function login(req, res) {
             return res.status(StatusCodes.UNAUTHORIZED).json({ error: "Invalid credentials!" })
         };
         const user = users.rows[0];
-        let tokens = jwtTokens(user);
+        const tokens = jwtTokens(user);
         res.cookie('refresh_token', tokens.refreshToken, { httpOnly: true });
         res.json({
             name: user.user_name,
@@ -34,7 +34,24 @@ async function login(req, res) {
 
 async function signup(req, res) {
     try {
+        const { user_email, user_name, user_password } = req.body;
 
+        const haveUserWithEmail = await pool.query(`
+        SELECT * FROM users WHERE user_email = $1`, [user_email]);
+        if (haveUserWithEmail.rowCount !== 0) {
+            return res.status(StatusCodes.CONFLICT).json({ error: 'Email already registered.' })
+        }
+        const hashedPassword = await bcrypt.hash(user_password, 10);
+        const newUser = await pool.query(`
+        INSERT INTO users (user_email, user_name, user_password, user_role) VALUES ($1, $2, $3, $4)`, [user_email, user_name, hashedPassword, 'user']);
+        const tokens = jwtTokens(newUser);
+        res.cookie('refresh_token', tokens.refreshToken, { httpOnly: true });
+        res.json({
+            name: user_name,
+            email: user_email,
+            accessToken: tokens.accessToken,
+            refreshToken: tokens.refreshToken
+        });
     } catch (error) {
         return res.status(StatusCodes.UNAUTHORIZED).json({ error: error.message });
     }
@@ -46,7 +63,7 @@ async function getRefreshToken(req, res) {
         if (refreshToken === null) return res.status(StatusCodes.UNAUTHORIZED).json({ error: "Unathorized" });
         jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (error, user) => {
             if (error) return res.status(StatusCodes.FORBIDDEN).json({ error: error });
-            let tokens = jwtTokens(user);
+            const tokens = jwtTokens(user);
             res.cookie('refresh_token', tokens.refreshToken, { httpOnly: true, sameSite: 'none', secure: true });
             res.json(tokens);
         });

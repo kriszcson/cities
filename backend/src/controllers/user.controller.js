@@ -42,14 +42,15 @@ async function insertUser(req, res) {
 
 async function updateUser(req, res) {
     try {
-        const id = req.params.id;
         let hashedPassword;
         if (req.body.user_password) {
             hashedPassword = await bcrypt.hash(req.body.user_password, 10);
         }
+        const newEmail = req.body.user_new_email || req.body.user_email;
         const userToUpdate = await pool.query(`
-        UPDATE users SET user_name = $1, user_email = $2, user_password = $3, user_role = $4 WHERE user_id = $5;`, [
-            req.body.user_name, req.body.user_email, hashedPassword, req.user_role, id
+                UPDATE users SET user_name = $1, user_email = $2, user_password = $3, user_role = $4 WHERE user_email = $5;
+                `, [
+            req.body.user_name, newEmail, hashedPassword, req.body.user_role, req.body.user_email
         ]);
         if (userToUpdate.rowCount > 0) {
             return res.status(StatusCodes.NO_CONTENT).json();
@@ -62,21 +63,33 @@ async function updateUser(req, res) {
     }
 }
 
+async function getUserIdByName(req, res) {
+    const { user_email } = req.body;
+    const user = await pool.query('SELECT * FROM users WHERE user_id = $1;', [user_email]);
+    if (user.rowCount === 0) {
+        return res.status(StatusCodes.NOT_FOUND).json({ message: 'User not found!' });
+    }
+    return res.status(StatusCodes.OK).json({ id: user.rows[0].user_id });
+}
+
 async function deleteUser(req, res) {
     try {
-        const id = req.params.id;
+        const email = req.params.email;
+        console.log(email)
         const userToDelete = await pool.query(`
-        DELETE FROM users WHERE user_id = $1;`, [id]);
-        if (userToDelete.deletedRows > 0) {
+                DELETE FROM users WHERE user_email = $1;
+                `, [email]);
+        console.log(userToDelete);
+        if (userToDelete.rowCount > 0) {
             return res.status(StatusCodes.NO_CONTENT).json();
         } else {
             return res.status(StatusCodes.NOT_FOUND).json({ message: "User not found!" });
         }
     } catch (err) {
-        res.status(500).json({ error: err });
+        res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: err });
     }
 }
 
 
-export { getUsers, getUserById, insertUser, updateUser, deleteUser }
+export { getUsers, getUserById, insertUser, updateUser, deleteUser, getUserIdByName }
 export default router;
