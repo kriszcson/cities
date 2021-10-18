@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { City } from 'src/app/models/city.model';
 
 @Component({
@@ -10,7 +11,9 @@ export class CardsComponent implements OnInit {
 
   @Input('cities') cities: City[];
 
-  constructor() { }
+  constructor(
+    private readonly router: Router
+  ) { }
 
   ngOnInit(): void {
   }
@@ -20,4 +23,7 @@ export class CardsComponent implements OnInit {
 
   }
 
+  getSingleCity(cityName: string): void {
+    this.router.navigate(['/cities'], { queryParams: { cityName }, queryParamsHandling: 'merge' });
+  }
 }

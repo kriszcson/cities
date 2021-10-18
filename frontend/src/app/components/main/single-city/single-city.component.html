@@ -1,0 +1,10 @@
+<app-header></app-header>
+<div *ngIf="!isLoading" class="wrapper shadow-lg p-3 mb-5 bg-white rounded">
+    <div class="content">
+        <div class="content__img"><img src="../../../../assets/images/{{city.imgUrl}}" alt=""></div>
+        <div class="content__text">
+            <div class="content__text__name">{{city.name}}</div>
+            <div class="content__text__long-desc  text-secondary">{{city.fullDesc}}</div>
+        </div>
+    </div>
+</div>

@@ -3,7 +3,7 @@
 
         <div class="row">
             <div class="col-md-4" *ngFor="let city of cities">
-                <div class="card text-white card-has-bg click-col" [ngStyle]="{'background': 'url(' +getBgImageSrc(city.imgUrl)+ ')no-repeat center center fixed'}">
+                <div class="card text-white card-has-bg click-col" [ngStyle]="{'background': 'url(' +getBgImageSrc(city.imgUrl)+ ')no-repeat center center fixed'}" (click)="getSingleCity(city.name)">
                     <div class="card-img-overlay d-flex flex-column">
                         <div class="card-body">
                             <small class="card-meta mb-2">{{city.country}}  </small>

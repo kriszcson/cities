@@ -13,6 +13,10 @@ import { AuthInterceptor } from './components/login/auth/auth.interceptor';
 import { AuthGuard } from './components/login/auth/auth.guard';
 import { MainComponent } from './components/main/main.component';
 import { CardsComponent } from './components/main/cards/cards.component';
+import { HeaderComponent } from './components/header/header.component';
+import { SingleCityComponent } from './components/main/single-city/single-city.component';
+import { SingleCityService } from './services/single-city.service';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 
 @NgModule({
@@ -25,13 +29,13 @@ import { CardsComponent } from './components/main/cards/cards.component';
     ReactiveFormsModule,
   ],
   declarations: [
-    AppComponent, LoginComponent, MainComponent, CardsComponent
+    AppComponent, LoginComponent, MainComponent, CardsComponent, HeaderComponent, SingleCityComponent, NotFoundComponent
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },/* 
     { provide: HTTP_INTERCEPTORS, useClass: GlobalHttpInterceptorService, multi: true },
     { provide: ErrorHandler, useClass: GlobalErrorHandlerService }, */
-    AuthGuard, FormBuilder, AuthService, CityService
+    AuthGuard, FormBuilder, AuthService, CityService, SingleCityService
   ],
   bootstrap: [AppComponent]
 })

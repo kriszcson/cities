@@ -11,6 +11,19 @@ async function getCities(req, res) {
     }
 }
 
+async function getCityByName(req, res) {
+    try {
+        const cityName = req.params.city;
+        const cityByName = await pool.query(`SELECT * FROM cities WHERE city_name = $1;`, [cityName]);
+        if (cityByName.rows.length === 0) {
+            return res.status(StatusCodes.NOT_FOUND).json({ message: "City not found" });
+        }
+        return res.status(StatusCodes.OK).json(cityByName.rows[0]);
+    } catch (err) {
+        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: err });
+    }
+}
+
 async function insertCity(req, res) {
     try {
         const city = await pool.query(`
@@ -33,4 +46,4 @@ async function insertCity(req, res) {
     }
 }
 
-export { getCities, insertCity };
+export { getCities, insertCity, getCityByName };

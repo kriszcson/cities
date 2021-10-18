@@ -3,11 +3,16 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './components/login/auth/auth.guard';
 import { LoginComponent } from './components/login/login.component';
 import { MainComponent } from './components/main/main.component';
+import { SingleCityComponent } from './components/main/single-city/single-city.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: '', component: MainComponent, canActivate: [AuthGuard] },
+  { path: 'cities', component: SingleCityComponent, canActivate: [AuthGuard] },
+  { path: '404', component: NotFoundComponent, canActivate: [AuthGuard] },
+  { path: '**', redirectTo: '/404' }
 ];
 
 @NgModule({

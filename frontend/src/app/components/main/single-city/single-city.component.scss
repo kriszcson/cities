@@ -1,0 +1,37 @@
+.wrapper {
+    height: 60vh;
+    width: 70%;
+    margin: 5rem auto;
+    .content {
+        display: flex;
+        margin: 0 auto;
+        justify-content: space-between;
+        width: 100%;
+        &__img {
+            width: 50%;
+            img {
+                width: 100%;
+                object-fit: cover;
+                height: 33rem;
+            }
+        }
+        &__text {
+            width: 45%;
+            margin-right: 3rem;
+            &__name {
+                margin-bottom: 1rem;
+                color: #884040 !important;
+                font-size: 3rem;
+                font-weight: 500;
+            }
+            &__country {
+                font-size: 1.2rem;
+                margin-bottom: 0;
+            }
+            &__long-desc {
+                line-height: 1.2;
+                font-weight: 500;
+            }
+        }
+    }
+}

@@ -18,31 +18,19 @@ export class CityService {
     ) { }
 
     getCities(): Observable<City[]> {
-        return this.authService.user.pipe(
-            take(1),
-            exhaustMap(user => {
-                const userData = JSON.parse(localStorage.getItem('userData') || '');
-                const headers = new HttpHeaders()
-                    .set('Authorization', `Bearer ${userData._token}`)
-                return this.http.get<any>(
-                    `${environment.BACKEND_URL}/cities`
-                );
-            }),
-            map(data => {
+        return this.http.get<any>(
+            `${environment.BACKEND_URL}/cities`)
+            .pipe(map((data) => {
                 return data.cities.map((city: any) => {
                     return {
-                        id: city.id,
+                        id: city.city_id,
                         name: city.city_name,
                         country: city.city_country,
+                        fullDesc: city.city_long_desc,
                         shortDesc: city.city_short_desc,
-                        longDesc: city.city_long_desc,
                         imgUrl: city.city_img_url
-                    };
-                });
-            }),
-            tap(cities => {
-                return cities;
-            })
-        )
+                    }
+                })
+            }))
     }
 }
