@@ -1,14 +1,28 @@
-.users-wrapper {
-    margin: 10rem;
-    th {
-        width: 5rem !important;
-    }
-    .delete-td {
-        display: flex;
-        justify-content: center;
-        img {
-            height: 2rem;
-            cursor: pointer;
+    .users-wrapper {
+        margin: 10rem;
+        font-size: 1.2rem;
+        th {
+            width: 5rem !important;
+        }
+        .delete-td {
+            display: flex;
+            justify-content: center;
+            img {
+                height: 2rem;
+                cursor: pointer;
+            }
         }
     }
-}
+    
+    @media (max-width: 812px) {
+        .users-wrapper {
+            margin: 0 auto;
+            margin-top: 5rem;
+            width: 100%;
+            padding: 1rem;
+            th {
+                width: 3rem !important;
+            }
+            font-size:0.8rem;
+        }
+    }

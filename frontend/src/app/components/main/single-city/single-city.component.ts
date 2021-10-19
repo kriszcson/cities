@@ -23,10 +23,9 @@ export class SingleCityComponent implements OnInit {
       if (cityName) {
         this.singleCityService.getCityByName(cityName).subscribe((city) => {
           this.city = city;
-          if (!this.city) {
-            this.router.navigate(['/404']);
-          }
           this.isLoading = false;
+        }, (error) => {
+          this.router.navigate(['/']);
         })
       }
     })

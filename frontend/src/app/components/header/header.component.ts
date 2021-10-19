@@ -1,7 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import jwt_decode from 'jwt-decode';
-import { BehaviorSubject } from 'rxjs';
 import { User } from 'src/app/models/user.model';
 
 import { AuthService } from 'src/app/services/auth.service';
@@ -40,20 +39,20 @@ export class HeaderComponent implements OnInit {
     return this.haveRole;
   }
 
-  getUser() {
+  getUser(): User | null {
     return this.user;
   }
 
-  getSignInOrUpString() {
+  getSignInOrUpString(): string {
     return this.isLoginMode ? 'Regisztráció' : 'Bejelentkezés';
   }
 
-  switchMode() {
+  switchMode(): void {
     this.isLoginMode = !this.isLoginMode;
     this.isLoginEventEmitter.emit(this.isLoginMode);
   }
 
-  logout() {
+  logout(): void {
     this.authService.logOut();
   }
 }

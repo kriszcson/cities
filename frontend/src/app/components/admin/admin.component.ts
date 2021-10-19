@@ -1,11 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import jwt_decode from 'jwt-decode';
-import { AuthResponseData } from 'src/app/models/auth-response.interface';
-import { GetUser } from 'src/app/models/get.user.model';
-import { UpdateUser } from 'src/app/models/update.user.model';
 
+import { GetUser } from 'src/app/models/get.user.model';
 import { User } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { UsersService } from 'src/app/services/users.service';
@@ -52,7 +49,7 @@ export class AdminComponent implements OnInit {
     })
   }
 
-  deleteUser(id: string) {
+  deleteUser(id: string): void {
     let conf = confirm('Biztosan törli a felhasználót?');
     if (conf === true) {
       this.isLoading = true;
@@ -72,7 +69,7 @@ export class AdminComponent implements OnInit {
     }
   }
 
-  handlingError(error: any) {
+  handlingError(error: any): void {
     switch (error.status) {
       case 500: this.error = "Sikertelen azonosítás!";
         break;

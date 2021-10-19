@@ -1,4 +1,5 @@
 import express from 'express';
+
 import { deleteRefreshToken, getRefreshToken, login, signup } from '../controllers/auth.controller.js';
 import { getCities, getCityByName, insertCity } from '../controllers/cities.controller.js';
 import { deleteUser, getUserById, getUsers, insertUser, updateUser } from '../controllers/user.controller.js';

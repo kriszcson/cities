@@ -2,7 +2,7 @@
                 display: flex;
                 justify-content: center;
                 height: auto;
-                width: 70%;
+                width: 80%;
                 margin: 5rem auto;
                 .content {
                     display: flex;
@@ -15,7 +15,7 @@
                         img {
                             width: 100%;
                             object-fit: cover;
-                            height: 33rem;
+                            height: auto;
                         }
                     }
                     &__text {
@@ -25,17 +25,24 @@
                         &__name {
                             margin-bottom: 1rem;
                             color: #884040 !important;
-                            font-size: 3rem;
-                            font-weight: 500;
+                            font-size: 2.8rem;
+                            font-weight: 600;
                         }
                         &__country {
                             font-size: 1.2rem;
                             margin-bottom: 0;
                         }
-                        &__long-desc {
+                        &__short-desc {
+                            color: #884040 !important;
                             line-height: 1.2;
                             font-weight: 600;
                             font-size: 1.3rem;
+                        }
+                        &__full-desc {
+                            margin-top: 2rem;
+                            line-height: 1.6;
+                            font-weight: 400;
+                            font-size: 1.1rem;
                         }
                     }
                 }
@@ -47,17 +54,19 @@
                         flex-direction: column;
                         &__img {
                             width: 100%;
-                            img {
-                                height: 20rem;
-                            }
                         }
                         &__text {
                             width: 100%;
                             margin: 0 auto;
-                            &__long-desc {
-                                line-height: 1;
-                                font-weight: 500;
-                                font-size: 1rem;
+                            margin-top: 2rem;
+                            line-height: 1;
+                            font-weight: 500;
+                            font-size: 1rem;
+                            &__name {
+                                font-size: 2rem;
+                            }
+                            &__short-desc {
+                                font-size: 1.1rem;
                             }
                         }
                     }
@@ -66,7 +75,7 @@
             
             @media screen and (max-width: 450px) {
                 .wrapper {
-                    width: 100%;
+                    width: 80%;
                     .content {
                         width: 100%;
                         padding: 1rem;

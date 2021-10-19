@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
+
 import { AuthService } from '../../services/auth.service';
 import { AuthResponseData } from '../../models/auth-response.interface';
 import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-login',
@@ -11,10 +13,10 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  signinForm: FormGroup = new FormGroup({
-    name: new FormControl(),
-    email: new FormControl(),
-    password: new FormControl()
+  regForm = this.fb.group({
+    name: ['', [Validators.required, Validators.minLength(5)]],
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', [Validators.required, Validators.minLength(5)]]
   });
 
   error: string | null = null;
@@ -24,25 +26,27 @@ export class LoginComponent implements OnInit {
   constructor(
     private readonly authService: AuthService,
     private readonly router: Router,
+    public fb: FormBuilder,
   ) { }
 
   ngOnInit(): void {
   }
 
-  switchMode(isLoginMode: any) {
+  switchMode(isLoginMode: any): void {
     this.isLoginMode = isLoginMode;
   }
 
-  getMode() {
+  getMode(): string {
     return this.isLoginMode ? 'Bejelentkezés' : 'Regisztráció';
   }
 
   onSubmit(): void {
+    this.error = '';
     this.isLoading = true;
     this.isLoginMode ? this.login() : this.signup();
   }
 
-  login() {
+  login(): void {
     this.authService.login(this.form.email.value, this.form.password.value)
       .subscribe(
         (data: AuthResponseData) => {
@@ -55,21 +59,26 @@ export class LoginComponent implements OnInit {
         })
   }
 
-  signup() {
-    this.authService.signup(this.form.email.value, this.form.name.value, this.form.password.value)
-      .subscribe(
-        (data: AuthResponseData) => {
-          this.router.navigate(['/'])
-          this.isLoading = false;
-        },
-        (error: any) => {
-          this.handlingError(error);
-          this.isLoading = false;
-        })
-
+  signup(): void {
+    console.log(this.regForm);
+    if (this.regForm.valid) {
+      this.authService.signup(this.form.email.value, this.form.name.value, this.form.password.value)
+        .subscribe(
+          (data: AuthResponseData) => {
+            this.router.navigate(['/'])
+            this.isLoading = false;
+          },
+          (error: any) => {
+            this.handlingError(error);
+            this.isLoading = false;
+          })
+    } else {
+      this.isLoading = false;
+      this.error = "Nem megfelelő formátumban adta meg az adatokat!"
+    }
   }
 
-  handlingError(error: any) {
+  handlingError(error: any): void {
     switch (error.status) {
       case 500: this.error = "Belső hiba!";
         break;
@@ -80,8 +89,8 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  get form() {
-    return this.signinForm.controls;
+  get form(): any {
+    return this.regForm.controls;
   }
 
 }

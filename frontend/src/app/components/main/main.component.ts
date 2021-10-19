@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+
 import { City } from 'src/app/models/city.model';
 import { CityService } from 'src/app/services/cities.service';
 

@@ -1,8 +1,8 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Observable, throwError } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
+import { BehaviorSubject, throwError } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 
 import jwt_decode from 'jwt-decode';

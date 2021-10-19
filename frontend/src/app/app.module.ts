@@ -35,9 +35,7 @@ import { UsersService } from './services/users.service';
     AppComponent, LoginComponent, MainComponent, CardsComponent, HeaderComponent, SingleCityComponent, NotFoundComponent, AdminComponent
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },/* 
-    { provide: HTTP_INTERCEPTORS, useClass: GlobalHttpInterceptorService, multi: true },
-    { provide: ErrorHandler, useClass: GlobalErrorHandlerService }, */
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     AuthGuard, FormBuilder, AuthService, CityService, SingleCityService, UsersService
   ],
   bootstrap: [AppComponent]
