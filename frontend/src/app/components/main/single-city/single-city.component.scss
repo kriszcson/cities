@@ -1,37 +1,75 @@
-.wrapper {
-    height: 60vh;
-    width: 70%;
-    margin: 5rem auto;
-    .content {
-        display: flex;
-        margin: 0 auto;
-        justify-content: space-between;
-        width: 100%;
-        &__img {
-            width: 50%;
-            img {
-                width: 100%;
-                object-fit: cover;
-                height: 33rem;
+            .wrapper {
+                display: flex;
+                justify-content: center;
+                height: auto;
+                width: 70%;
+                margin: 5rem auto;
+                .content {
+                    display: flex;
+                    margin: 0 auto;
+                    padding: 3rem;
+                    justify-content: space-between;
+                    width: 100%;
+                    &__img {
+                        width: 50%;
+                        img {
+                            width: 100%;
+                            object-fit: cover;
+                            height: 33rem;
+                        }
+                    }
+                    &__text {
+                        width: 45%;
+                        margin-right: 3rem;
+                        margin-left: 3rem;
+                        &__name {
+                            margin-bottom: 1rem;
+                            color: #884040 !important;
+                            font-size: 3rem;
+                            font-weight: 500;
+                        }
+                        &__country {
+                            font-size: 1.2rem;
+                            margin-bottom: 0;
+                        }
+                        &__long-desc {
+                            line-height: 1.2;
+                            font-weight: 600;
+                            font-size: 1.3rem;
+                        }
+                    }
+                }
             }
-        }
-        &__text {
-            width: 45%;
-            margin-right: 3rem;
-            &__name {
-                margin-bottom: 1rem;
-                color: #884040 !important;
-                font-size: 3rem;
-                font-weight: 500;
+            
+            @media screen and (max-width: 1024px) {
+                .wrapper {
+                    .content {
+                        flex-direction: column;
+                        &__img {
+                            width: 100%;
+                            img {
+                                height: 20rem;
+                            }
+                        }
+                        &__text {
+                            width: 100%;
+                            margin: 0 auto;
+                            &__long-desc {
+                                line-height: 1;
+                                font-weight: 500;
+                                font-size: 1rem;
+                            }
+                        }
+                    }
+                }
             }
-            &__country {
-                font-size: 1.2rem;
-                margin-bottom: 0;
+            
+            @media screen and (max-width: 450px) {
+                .wrapper {
+                    width: 100%;
+                    .content {
+                        width: 100%;
+                        padding: 1rem;
+                    }
+                }
             }
-            &__long-desc {
-                line-height: 1.2;
-                font-weight: 500;
-            }
-        }
-    }
-}

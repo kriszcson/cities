@@ -1,44 +1,31 @@
-<div *ngIf="!isLoading" class="wrapper shadow-lg p-3 mb-5 bg-white rounded">
-    <div class="admin-form">
-        <form [formGroup]="updateForm" (ngSubmit)="updateUser()">
-            <div class="title">Felhasználó adatainak módosítása</div>
-            <div class="form-group">
-                <label>Eredeti e-mail cím</label>
-                <input type="email" class="form-control" placeholder="E-mail" formControlName="oldEmail">
-            </div>
-            <div class="form-group">
-                <label>Új e-mail cím (amennyiben változik)</label>
-                <input type="email" class="form-control" placeholder="E-mail" formControlName="newEmail">
-                <label>Név</label>
-                <input type="text" class="form-control" placeholder="Név" formControlName="name">
-            </div>
-            <div class="form-group">
-                <label>Jelszó</label>
-                <input type="password" class="form-control" placeholder="Password" formControlName="password">
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" formControlName="giveAdmin">
-                <label class="form-check-label">Adminisztrátori jogok adása</label>
-            </div>
-            <div class="btns">
-                <div class="btns__login ">
-                    <button class=" btn btn-primary" type="submit">Módosítás</button>
-                </div>
-            </div>
-        </form>
-        <form [formGroup]="deleteForm" (ngSubmit)="deleteUser()">
-            <div class="delete">
-                <div class="title">Felhasználó törlése</div>
-                <label>E-mail cím</label>
-                <input type="email" class="form-control" placeholder="E-mail" formControlName="delEmail">
-                <div class="btns__ delete">
-                    <button class=" btn btn-warning delete-btn" type="submit">Törlés</button>
-                </div>
-            </div>
-            <div class="spinner-wrapper">
-                <div *ngIf="isLoading" class="spinner-wrapper__spinner spinner-border text-secondary " role="!isLoading "></div>
-            </div>
-            <div *ngIf="error" class="error alert alert-danger">{{error}}</div>
-        </form>
-    </div>
+<app-header>
+</app-header>
+<div class="users-wrapper">
+    <table id="users-table" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th class="th-sm">Sorszám
+                </th>
+                <th class="th-sm">Név
+                </th>
+                <th class="th-sm">E-mail
+                </th>
+                <th class="th-sm">Státusz
+                </th>
+                <th class="th-sm">Törlés
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of users | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize; let i =index;">
+                <td>{{i+1}}</td>
+                <td>{{user.name}}</td>
+                <td>{{user.email}}</td>
+                <td>{{user.role}}</td>
+                <td class="delete-td"><img *ngIf="user.email!='admin@admin.com'" src="../../../assets/icons/delete.png" (click)="deleteUser(user.id)"></td>
+            </tr>
+        </tbody>
+    </table>
+    <ngb-pagination [pageSize]="pageSize" [collectionSize]="collectionSize" [(page)]="page" aria-label="Default pagination"></ngb-pagination>
+
 </div>

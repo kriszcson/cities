@@ -2,20 +2,12 @@
     <div class="container">
 
         <div class="row">
-            <div class="col-md-4" *ngFor="let city of cities">
-                <div class="card text-white card-has-bg click-col" [ngStyle]="{'background': 'url(' +getBgImageSrc(city.imgUrl)+ ')no-repeat center center fixed'}" (click)="getSingleCity(city.name)">
-                    <div class="card-img-overlay d-flex flex-column">
-                        <div class="card-body">
-                            <small class="card-meta mb-2">{{city.country}}  </small>
-                            <h4 class="card-title mt-0 ">
-                                {{city.name}}</h4>
-                        </div>
-                        <div class="card-footer">
-                            <div class="media">
-                                <div class="media-body">
-                                    <small>{{city.shortDesc}}</small>
-                                </div>
-                            </div>
+            <div class="col-md-5" *ngFor="let city of cities">
+                <div class="card text-white card-has-bg click-col" (click)="getSingleCity(city.name)">
+                    <div class="embed-responsive embed-responsive-16by9">
+                        <img class="card-img-top embed-responsive-item" src="../../../../assets//images/{{city.imgUrl}}" />
+                        <div class="text">
+                            <div class="text__city-name">{{city.name}}</div>
                         </div>
                     </div>
                 </div>

@@ -1,4 +1,4 @@
-export class dbUser {
+export class UpdateUser {
     constructor(
         public oldEmail: string,
         public name: string,

@@ -1,8 +1,34 @@
-nav {
-    background-color: #884040 !important;
-    font-weight: 700 !important;
-    height: 5%;
-    .nav-item {
-        cursor: pointer;
+    nav {
+        background-color: #884040 !important;
+        font-weight: 700 !important;
+        height: 5%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        .nav-item {
+            cursor: pointer;
+        }
     }
-}
+    
+    @media screen and (max-width: 812px) {
+        nav {
+            height: 8%;
+            overflow: hidden;
+        }
+        .container {
+            align-items: stretch;
+            .navbarResponsive {
+                padding: 0;
+            }
+            ul {
+                li {
+                    display: inline !important;
+                    a {
+                        font-size: 1rem;
+                        padding: 0;
+                        padding-right: 1rem;
+                    }
+                }
+            }
+        }
+    }

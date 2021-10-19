@@ -74,12 +74,10 @@ async function getUserIdByName(req, res) {
 
 async function deleteUser(req, res) {
     try {
-        const email = req.params.email;
-        console.log(email)
+        const id = req.params.id;
         const userToDelete = await pool.query(`
-                DELETE FROM users WHERE user_email = $1;
-                `, [email]);
-        console.log(userToDelete);
+                DELETE FROM users WHERE user_id = $1;
+                `, [id]);
         if (userToDelete.rowCount > 0) {
             return res.status(StatusCodes.NO_CONTENT).json();
         } else {

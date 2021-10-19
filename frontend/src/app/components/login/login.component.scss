@@ -56,18 +56,26 @@ input {
     margin-bottom: 0.5rem;
 }
 
-@media screen and (max-height: 450px) {
+@media screen and (max-width: 1366px) {
     .sidenav {
-        padding-top: 15px;
+        visibility: hidden;
     }
 }
 
-@media screen and (max-width: 812px) {
-    .login-main-text {
-        margin-top: 30%;
+@media screen and (max-width: 1024px) {
+    .container {
+        margin-top: 10rem;
+        .main {
+            display: flex;
+            justify-content: center;
+            margin: 0 auto;
+        }
     }
-    .sidenav {
-        visibility: hidden;
+}
+
+@media screen and (max-width: 414px) {
+    .container {
+        margin-top: 5rem;
     }
 }
 
@@ -77,6 +85,17 @@ input {
     }
     .register-form {
         margin-top: 10%;
+    }
+}
+
+@media screen and (max-width: 375px) {
+    .container {
+        margin-top: 3rem;
+    }
+    .login-main-text {
+        &__desc {
+            font-size: 3.2rem;
+        }
     }
 }
 

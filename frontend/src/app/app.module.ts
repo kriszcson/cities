@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppBootstrapModule } from './bootstrap.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AuthService } from './services/auth.service';
 import { LoginComponent } from './components/login/login.component';
@@ -28,7 +29,7 @@ import { UsersService } from './services/users.service';
     HttpClientModule,
     AppBootstrapModule,
     FormsModule,
-    ReactiveFormsModule,
+    ReactiveFormsModule, NgbModule
   ],
   declarations: [
     AppComponent, LoginComponent, MainComponent, CardsComponent, HeaderComponent, SingleCityComponent, NotFoundComponent, AdminComponent
